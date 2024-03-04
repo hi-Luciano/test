@@ -7,4 +7,4 @@ pillow==10.2.0
 psd-tools==1.9.30
 python-bidi==0.4.2
 XlsxWriter==3.2.0
-Werkzeug==2.2.2
+Werkzeug==3.0.1
