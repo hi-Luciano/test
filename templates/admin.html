@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>پنل ادمین</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    
+    <style>
+ body {
+        font-family: 'vazirmatn', sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    .flash-messages div {
+        text-align: right;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        color: #fff;
+    }
+
+    .info { background-color: #007bff; }
+    .success { background-color: #28a745; }
+    .warning { background-color: #ffc107; }
+    .error { background-color: #dc3545; }
+
+    form {
+        margin-bottom: 20px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    label {
+        margin-bottom: 10px;
+        display: block;
+        font-size: 16px; /* تنظیم اندازه فونت برچسب */
+    }
+
+    input[type="text"], input[type="submit"] {
+        padding: 10px;
+        margin: 10px 0; /* تنظیم فاصله یکسان برای همه عناصر فرم */
+        display: block;
+        width: calc(100% - 20px); /* اطمینان از اینکه عناصر فرم در کنار هم هماهنگ هستند */
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box; /* اطمینان از اینکه پدینگ و بوردر در داخل اندازه‌های تعیین شده جای گیرند */
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        font-weight: bold; /* افزایش ضخامت فونت برای دکمه */
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .scrollable-box {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        overflow-y: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: right; font-family: vazirmatn;">پنل ادمین</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('add_serial') }}" method="post">
+        <label for="serial_code" style="text-align: right; font-family: vazirmatn;">افزودن کد سریال</label>
+        <input type="text" id="serial_code" name="serial_code" required>
+        <input type="submit" value="افزودن سریال" style="font-family: vazirmatn;">
+    </form>
+
+    
+    <div class="scrollable-box">
+        <table>
+            <a href="{{ url_for('download_excel') }}" class="btn btn-primary"><i class="fas fa-download"></i> دانلود اکسل</a>
+
+            
+            <tr>
+                <th>سریال</th>
+                <th>وضعیت</th>
+                <th>تصویر</th>
+                <th>نام</th>
+                <th>سند درخت کاری</th>
+                <th>حذف/ویرایش</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.serial_code }}</td>
+                <td>{{ product.status }}</td>
+                <td>
+                    {% if product.image_path %}
+                    <a href="{{ url_for('static', filename=product.image_path) }}" class="hero-image-container">
+                        <img src="{{ url_for('static', filename=product.image_path) }}" alt="Product Image" style="width: 100px; height: auto;">
+                    </a>
+                        {% endif %}
+                </td>
+                <td>{{ product.text_content }}</td>
+                <td> {% if product.export_image_path %}
+                    <a href="{{ url_for('static', filename=product.export_image_path) }}" class="hero-image-container">
+                    <img src="{{ url_for('static', filename=product.export_image_path) }}" alt="Processed Image" style="width: 50px; height: auto;">
+                    </a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('edit_product', product_id=product.id) }}"><i class="fas fa-edit"></i> </a>
+                    
+                    <a href="javascript:void(0);" onclick="confirmDelete('{{ url_for('delete_product', product_id=product.id) }}')"><i class="fas fa-trash"></i></a>
+                </td>                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+<script>
+function confirmDelete(deleteUrl) {
+    if (confirm("آیا مطمعن هستید که میخواهید این سریال رو حذف کنید؟")) {
+        // ارسال درخواست حذف به سرور
+        fetch(deleteUrl, { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    // بارگذاری مجدد صفحه برای نمایش تغییرات
+                    window.location.reload();
+                } else {
+                    alert("There was an error trying to delete the product.");
+                }
+            })
+            .catch(error => alert("There was an error trying to delete the product."));
+    }
+}
+</Script>
+
+</body>
+</html>

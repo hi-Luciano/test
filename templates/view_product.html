@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fa" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'><link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <title>صدور سند</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+<style>
+  /* 
+=========================
+Fonts
+=========================
+
+font-family: 'Outfit', sans-serif;
+
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+/* 
+========================
+Variables
+========================
+*/
+
+
+:root {
+    
+    font-size: 15px;
+    
+    /* Primary */
+    --var-soft-blue: hsl(0, 0%, 0%);
+    --var-cyan: hsl(178, 100%, 50%);
+    /* Neutral */
+    --var-main-darkest: #eff3f4;
+    --var-card-dark: #ffffff;
+    --var-line-dark: hsl(215, 32%, 27%);
+    --var-lightest: #217093;
+    text-align: right;
+    
+    /* Fonts */
+    
+    --var-heading: normal normal 600 1.5em/1.6em 'vazirmatn', sans-serif;
+    
+    --var-small-heading: normal normal 400 1em/1em 'vazirmatn', sans-serif;
+    
+    --var-para: normal normal 300 1em/1.55em 'vazirmatn', sans-serif;
+}
+
+/* 
+=======================
+Setup
+=======================
+*/
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+}
+
+body {
+    background-color: var(--var-main-darkest);
+}
+
+img {
+    width: 100%;
+    border-radius: 15px;
+    display: block;
+}
+
+a {
+    color: inherit;
+}
+
+/* 
+
+Eye view
+
+https://i.postimg.cc/9MtT4GZY/view.png' border='0' alt='view */
+
+/*
+=========================
+Font Styling
+=========================
+*/
+
+h1 {
+    font: var(--var-heading);
+    color: var(--var-lightest);
+    padding: 1.2em 0;
+}
+
+h2 {
+    font: var(--var-small-heading);
+    color: var(--var-lightest);
+    /* padding on .coin-base */
+}
+
+p {
+    font: var(--var-para);
+    color: var(--var-soft-blue);
+}
+
+span {
+    color: rgb(0, 0, 0);
+}
+/* 
+=====================
+Classes
+=====================
+*/
+
+/* LAYOUT */
+
+.card-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 2em auto;
+    background-color: var(--var-card-dark);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    padding: 2rem;
+}
+
+div.flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.coin-base, .time-left, .card-attribute {
+    display: flex;
+    align-items: center;
+    padding: 1em 0;
+}
+
+.card-attribute {
+    padding-bottom: 1.5em;
+    border-top: 2px solid var(--var-line-dark);
+}
+
+a.hero-image-container {
+    position: relative;
+    display: block;
+}
+
+
+
+/* Details */
+
+img.eye {
+    position: absolute;
+    width: 100%;
+    max-width: 2em;
+    top: 44%;
+    left: 43%;
+}
+
+@media (min-width:400px) {
+  img.eye {
+    max-width: 3em;
+}
+}
+
+.hero-image-container::after {
+    content: '';
+    background-image: url("https://i.postimg.cc/9MtT4GZY/view.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 5rem;
+    background-color: hsla(178, 100%, 50%, 0.3);
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.hero-image-container:hover::after {
+  opacity: 1;
+}
+
+.small-image {
+    width: 1.2em;
+    margin-right: .5em;
+}
+
+.small-avatar {
+    width: 2em;
+    border-radius: 200px;
+    outline: 2px solid white;
+    margin-right: 1.4em;
+}
+
+div.attribution {
+    margin: 0 auto;
+    width: 100%;
+    font: var(--var-para);
+    text-align: center;
+    padding: 1.5em 0 4em 0;
+    color: var(--var-line-dark);
+}
+.attribution a {
+    color: var(--var-soft-blue);
+}
+
+@media (min-width:600px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+
+
+
+
+
+
+
+
+/*
+    Auther: Abdelrhman Said
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus,
+*:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  display: grid;
+  height: auto;
+  width: auto;
+  font-family: "Poppins", sans-serif;
+  place-items: center;
+ 
+}
+
+.wrapper {
+  display: inline-flex;
+  list-style: none;
+}
+
+.wrapper .icon {
+  position: relative;
+  
+  border-radius: 50%;
+  padding: 15px;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+  background: #1877F2;
+  color: #ffffff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+  background: #1DA1F2;
+  color: #ffffff;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #2AABEE;
+  color: #ffffff;
+}
+
+.wrapper .github:hover,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip::before {
+  background: #25d366;
+  color: #ffffff;
+}
+
+.wrapper .youtube:hover,
+.wrapper .youtube:hover .tooltip,
+.wrapper .youtube:hover .tooltip::before {
+  background: #2AABEE;
+  color: #ffffff;
+}
+</style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body>
+  <div class="card-container">
+      <a href="{{ url_for('static', filename=product.export_image_path) }}" class="hero-image-container">
+        {% if product.export_image_path %}
+        <img src="{{ url_for('static', filename=product.export_image_path) }}" alt="تصویر" style="height: min-content;" />
+
+
+
+        {% endif %}
+      </a>
+      <main class="main-content">
+        <h1>{{ product.text_content }}</h1>
+        
+        <div class="flex-row">
+          <div class="coin-base">
+            <img src="https://i.postimg.cc/JzTddChr/serial-number-64.png" alt="serial" class="small-image" />
+            <h2>{{ product.serial_code }}</h2>
+          </div>
+          <div class="time-left">
+            
+          </div>
+        </div>
+      </main>
+      <div class="card-attribute" >
+        <ul class="wrapper">
+          <a href="#" onclick="shareOnFacebook(); return false;">
+          <li class="icon facebook">
+            <span class="tooltip">Facebook</span>
+            <span><i class="fab fa-facebook-f"></i></span>
+          </li>
+        </a>
+          <a href="#" onclick="shareOnTwitter();return false;">
+          <li class="icon twitter">
+            <span class="tooltip">Twitter</span>
+            <span><i class="fab fa-twitter"></i></span>
+          </li>
+        </a>
+        <a href="#" onclick="shareOnTelegram();return false;">
+          <li class="icon instagram">
+            <span class="tooltip">Telegram</span>
+            <span><i class="fab fa-telegram"></i></span>
+          </li>
+          </a>
+          <a href="#" onclick="shareOnWhatsApp();return false;">
+          <li class="icon github">
+            <span class="tooltip">WhatsApp</span>
+            <span><i class="fab fa-whatsapp"></i>
+            </span>
+        </li>
+        </a>
+      <a href="{{ url_for('static', filename=product.export_image_path) }}" download="سند درختکاری.jpg">
+        <li class="icon youtube">
+          <span class="tooltip">دانلود</span>
+          <span><i class="fas fa-download"></i></span>
+        </li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+
+
+<script>
+  function shareOnWhatsApp() {
+      var currentPageUrl = encodeURIComponent(window.location.href);
+      var whatsappUrl = `https://wa.me/?text=${currentPageUrl}`;
+      window.open(whatsappUrl, '_blank');
+  }
+
+  function shareOnTwitter() {
+    var text = "سند درخت کاری "; // متنی که می‌خواهید قبل از لینک نمایش داده شود
+    var currentPageUrl = encodeURIComponent(window.location.href); // انکود کردن URL صفحه فعلی
+    var twitterUrl = `https://twitter.com/intent/tweet?text=${text}${currentPageUrl}`;
+    window.open(twitterUrl, '_blank');
+}
+
+function shareOnFacebook() {
+    var currentPageUrl = encodeURIComponent(window.location.href); // انکود کردن URL صفحه فعلی
+    var facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`;
+    window.open(facebookUrl, '_blank');
+}
+
+function shareOnTelegram() {
+    var currentPageUrl = encodeURIComponent(window.location.href); // انکود کردن URL صفحه فعلی
+    var text = "سند درخت کاری"; // متن دلخواه شما
+    var telegramUrl = `https://t.me/share/url?url=${currentPageUrl}&text=${encodeURIComponent(text)}`;
+    window.open(telegramUrl, '_blank');
+}
+
+  </script>
+
+  
+</body>
+<!-- partial -->
+  
+</body>
+</html>
+
+
+
+
